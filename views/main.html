@@ -1,18 +1,52 @@
 <div class="header">
-  <h3 class="text-muted">chatty</h3>
+  <h4 class="text-muted">chatty</h4>
 </div>
 
-<h4>Latest Chats:</h4>
-<div class="jumbotron">
-
-	<form ng-submit="addMessage(newMessage)">
-		<input ng-model="newMessage" type="text" placeholder="Hello!">
-	</form>
-
-	<div ng-repeat="message in messages track by $index">
-    <small>{{ message.time | date : 'MMM d h:mm a' }}</small>
-    <p>{{ message.message }}</p>
-
+<div class="main-wrapper col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
+  <div ng-show="!currentUser.username" class="profile-form-group">
+    <h3 class="text-center">Welcome to Chatty!</h3>
+    <br>
+    <h4 class="text-center">Enter Your Profile Info</h4>
+    <form class="profile-form form-group" ng-submit="addUser(user)">
+      <div class="form-group">
+        <label for="username">Name</label>
+        <input class="form-control username" id="username" ng-model="user.username" type="text">
+      </div>
+      <div class="form-group">
+        <label for="profileUrl">Profile Picture</label>
+        <input class="form-control" type="text" id="profileUrl" ng-model="user.profileUrl" type="url">
+      </div>
+      <button class="btn btn-primary">Add Profile</button>
+    </form>
   </div>
 
+  <div ng-show="currentUser.username" class="profile">
+    <div class="col-xs-4">
+      <img class="profile-image" ng-src="{{ user.profileUrl }}" alt="">
+    </div>
+    <div class="col-xs-8">
+      <h4>Welcome, {{ user.username }}!</h4>
+      <h5>Thanks for joining!</h5>
+    </div>
+  </div>
+  <h4>Enter Your Message</h4>
+  <form class="form-group message-form" ng-submit="addMessage(newMessage)">
+    <div class="form-group">
+      <input class="form-control" ng-model="newMessage" type="text" placeholder="What's on your mind?">
+    </div>
+  </form>
+
+  <h4 class="chat-heading text-center">Latest Chats</h4>
+  <div class="messages-container">
+    <div class="message-container text-center" ng-repeat="message in messages track by $index">
+      <div class="col-xs-2">
+        <img class="profile-thumbnail" ng-src="{{ user.profileUrl }}" alt="">
+      </div>
+      <div class="col-xs-10">
+         <span class="username">{{ user.username }}</span>
+        <small class="time">{{ message.time | date : 'MMM d h:mm a' }}</small>
+        <p class="message">{{ message.message }}</p>
+      </div>
+    </div>
+  </div>
 </div>
