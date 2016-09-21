@@ -117,7 +117,7 @@ Now that we have basic functionality, let's do some server-side data manipulatio
 
 The front end will be fastest, all we need is to change our HTML to accept objects. Let's change our `ng-repeat` div to look something like this:
 ```html
-<div ng-repeat="message in messages track by $index">{{message.message}} : {{message.time}}</div>
+<div ng-repeat="message in messages track by $index">{{message.message}} :  {{message.time}}</div>
 ```
 This is the only front-end change we need to make! Now we just need to add dates on our back-end, which is as easy as changing what we push to our messages array. Instead of pushing `req.body.message` alone, let's create a new object and push that to the `messages` array. The object should have a `message` property and a `time` property.
 ```javascript
