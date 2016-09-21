@@ -35,6 +35,13 @@ app.post('/api/messages', ( req, res ) => {
   }).json( messages );
 });
 
+app.options('/api/messages', ( req, res ) => {
+  res.status(200).set({
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
+    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+  }).send();
+})
 
 
 app.listen( port, () => {
